@@ -24,10 +24,12 @@ function H1Comp() {
 
   let chg = e => setCounters(counters + 10)
 
+  console.log('navigator.getGamepads() :>> ', navigator.getGamepads());
   return (
     <div className="App">
 
       some crap in h1 {serverData.id} is {serverData.name}
+
 
       <button onClick={chg}> click </button>
       <div ref={displayRef}></div>
