@@ -17,4 +17,8 @@ export default function Sketch(p, valu) {
         p.fill(r, g, b)
         p.ellipse(p.mouseX, p.mouseY, valu, valu);
     }
+
+    p.keyPressed = () => {
+        p.background(Math.floor(p.random(0, 255)), Math.floor(p.random(0, 255)), Math.floor(p.random(0, 255)));
+    }
 };
