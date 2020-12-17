@@ -1,22 +1,37 @@
 import logo from './logo.svg';
 import './App.css';
 import { Route } from 'react-router-dom';
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import p5 from 'p5'
+import Sketch from './Sketch';
+
 
 function H1Comp() {
 
   const [serverData, setServerData] = useState({});
 
+  const [counters, setCounters] = useState(1);
+  const displayRef = useRef();
   useEffect(() => {
-    fetch("/api").then(x => x.json()).then(x => setServerData(x));
+    // fetch("/api").then(x => x.json()).then(x => setServerData(x));
 
-  }, [])
+    const tp = new p5((p) => Sketch(p, counters), displayRef.current);
+
+    return function cleanup() {
+      tp.remove();
+    };
+  }, [counters])
+
+  let chg = e => setCounters(counters + 10)
 
   return (
     <div className="App">
 
       some crap in h1 {serverData.id} is {serverData.name}
-    </div>
+
+      <button onClick={chg}> click </button>
+      <div ref={displayRef}></div>
+    </div >
   );
 }
 
